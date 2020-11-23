@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity", "Identity\Identity.csproj", "{D9281D7B-C15D-4EE7-AE7A-F8236E2229A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity", "Identity\Identity.csproj", "{D9281D7B-C15D-4EE7-AE7A-F8236E2229A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{4BA7377D-6636-4518-9155-0DCC72624E01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{4BA7377D-6636-4518-9155-0DCC72624E01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientMvc", "ClientMvc\ClientMvc.csproj", "{4EFD849E-10FB-49A1-8046-A4F7016AB839}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4BA7377D-6636-4518-9155-0DCC72624E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BA7377D-6636-4518-9155-0DCC72624E01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BA7377D-6636-4518-9155-0DCC72624E01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EFD849E-10FB-49A1-8046-A4F7016AB839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EFD849E-10FB-49A1-8046-A4F7016AB839}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EFD849E-10FB-49A1-8046-A4F7016AB839}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EFD849E-10FB-49A1-8046-A4F7016AB839}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
