@@ -1,0 +1,9 @@
+﻿Column names are too long for Oracle, then changed them as below :
+	AllowedAccessTokenSigningAlgorithms --> AllowedAccessTokenSignAlg
+	UpdateAccessTokenClaimsOnRefresh --> UpdateAccessTokenCsOnRefresh
+	FrontChannelLogoutSessionRequired --> FrontChannelLogoutSessionReq
+	BackChannelLogoutSessionRequired --> BackChannelLogoutSessionReq
+	AlwaysIncludeUserClaimsInIdToken --> AlwaysIncUserClaimsInIdToken
+	AllowedIdentityTokenSigningAlgorithms --> AllowedIdentityTokenSignAlg
+
+	Also some FK and PK names has to be clipped

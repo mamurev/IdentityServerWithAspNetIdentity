@@ -13,7 +13,7 @@ namespace Identity.Data
                 new Client
                 {
                     ClientId = "oauthClient",
-                    ClientName = "Example client application using client credentials",
+                    ClientName = "Credential",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = new List<Secret> {new Secret("SuperSecretPassword".Sha256())}, // change me!
                     AllowedScopes = new List<string> {"api1.read"}
@@ -21,7 +21,7 @@ namespace Identity.Data
                 new Client
                 {
                     ClientId = "oidcClient",
-                    ClientName = "Example Client Application",
+                    ClientName = "Code",
                     ClientSecrets = new List<Secret> {new Secret("SuperSecretPassword".Sha256())}, // change me!
     
                     AllowedGrantTypes = GrantTypes.Code,
