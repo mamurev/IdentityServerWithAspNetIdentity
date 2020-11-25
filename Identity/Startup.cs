@@ -1,20 +1,12 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Identity.Data;
-using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
-using IdentityServer4.Models;
-using IdentityServer4.Test;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace Identity
 {
@@ -34,7 +26,9 @@ namespace Identity
                 /*When you go to create and use your own signing credentials, do so using a tool such as OpenSSL or the New-SelfSignedCertificate PowerShell command. 
                  * You can use an X509 certificate, but there’s typically no need to have it issued by a Global CA. You’re only interested in the private key here.*/
                 .AddDeveloperSigningCredential()
-                .AddOperationalStore(options => options.ConfigureDbContext = builder => builder.UseOracle(
+                //To solve the oracle database (older verisons) object length restriction
+                //Add ApplicationPersistedGrantDbContext and ApplicationConfigurationDbContext
+                .AddOperationalStore<ApplicationPersistedGrantDbContext>(options => options.ConfigureDbContext = builder => builder.UseOracle(
                                                                                                             connectionString, 
                                                                                                             sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly)))
                 .AddConfigurationStore<ApplicationConfigurationDbContext>(options => options.ConfigureDbContext = builder => builder.UseOracle(
@@ -48,7 +42,7 @@ namespace Identity
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            InitializeDbTestData(app);
+            //InitializeDbTestData(app);
 
             app.UseStaticFiles();
             app.UseRouting();
@@ -69,14 +63,14 @@ namespace Identity
 
                 var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationConfigurationDbContext>();//<ConfigurationDbContext>();
 
-                //if (!context.Clients.Any())
-                //{
-                //    foreach (var client in Clients.Get())
-                //    {
-                //        context.Clients.Add(client.ToEntity());
-                //    }
-                //    context.SaveChanges();
-                //}
+                if (!context.Clients.Any())
+                {
+                    foreach (var client in Clients.Get())
+                    {
+                        context.Clients.Add(client.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
 
                 if (!context.IdentityResources.Any())
                 {

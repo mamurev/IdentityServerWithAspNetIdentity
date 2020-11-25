@@ -63,12 +63,12 @@ namespace Identity.Migrations
                 column: "Expiration");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PG_SubjectId_ClientId_Type",
+                name: "IX_PersistedGrants_SubjectId_~",
                 table: "PersistedGrants",
                 columns: new[] { "SubjectId", "ClientId", "Type" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PG_SubjectId_SessionId_Type",
+                name: "IX_PersistedGrants_SubjectId~1",
                 table: "PersistedGrants",
                 columns: new[] { "SubjectId", "SessionId", "Type" });
         }

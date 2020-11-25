@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Oracle.EntityFrameworkCore.Metadata;
 
-namespace Identity.Migrations.ConfigurationDb
+namespace Identity.Migrations.ApplicationConfigurationDb
 {
     public partial class InitialIdentityServerMigration : Migration
     {
@@ -18,8 +18,7 @@ namespace Identity.Migrations.ConfigurationDb
                     Name = table.Column<string>(maxLength: 200, nullable: false),
                     DisplayName = table.Column<string>(maxLength: 200, nullable: true),
                     Description = table.Column<string>(maxLength: 1000, nullable: true),
-                    //AllowedAccessTokenSigningAlgorithms = table.Column<string>(maxLength: 100, nullable: true),
-                    AllowedAccessTokenSignAlg = table.Column<string>(maxLength: 100, nullable: true),
+                    AllowedAccessTokenSigningAlgo = table.Column<string>(name: "AllowedAccessTokenSigningAlgo~", maxLength: 100, nullable: true),
                     ShowInDiscoveryDocument = table.Column<bool>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Updated = table.Column<DateTime>(nullable: true),
@@ -66,25 +65,25 @@ namespace Identity.Migrations.ConfigurationDb
                     LogoUri = table.Column<string>(maxLength: 2000, nullable: true),
                     RequireConsent = table.Column<bool>(nullable: false),
                     AllowRememberConsent = table.Column<bool>(nullable: false),
-                    AlwaysIncUserClaimsInIdToken = table.Column<bool>(nullable: false),
+                    AlwaysIncludeUserClaimsInIdTo = table.Column<bool>(name: "AlwaysIncludeUserClaimsInIdTo~", nullable: false),
                     RequirePkce = table.Column<bool>(nullable: false),
                     AllowPlainTextPkce = table.Column<bool>(nullable: false),
                     RequireRequestObject = table.Column<bool>(nullable: false),
                     AllowAccessTokensViaBrowser = table.Column<bool>(nullable: false),
                     FrontChannelLogoutUri = table.Column<string>(maxLength: 2000, nullable: true),
-                    FrontChannelLogoutSessionReq = table.Column<bool>(nullable: false),
+                    FrontChannelLogoutSessionRequ = table.Column<bool>(name: "FrontChannelLogoutSessionRequ~", nullable: false),
                     BackChannelLogoutUri = table.Column<string>(maxLength: 2000, nullable: true),
-                    BackChannelLogoutSessionReq = table.Column<bool>(nullable: false),
+                    BackChannelLogoutSessionRequi = table.Column<bool>(name: "BackChannelLogoutSessionRequi~", nullable: false),
                     AllowOfflineAccess = table.Column<bool>(nullable: false),
                     IdentityTokenLifetime = table.Column<int>(nullable: false),
-                    AllowedIdentityTokenSignAlg = table.Column<string>(maxLength: 100, nullable: true),
+                    AllowedIdentityTokenSigningAl = table.Column<string>(name: "AllowedIdentityTokenSigningAl~", maxLength: 100, nullable: true),
                     AccessTokenLifetime = table.Column<int>(nullable: false),
                     AuthorizationCodeLifetime = table.Column<int>(nullable: false),
                     ConsentLifetime = table.Column<int>(nullable: true),
                     AbsoluteRefreshTokenLifetime = table.Column<int>(nullable: false),
                     SlidingRefreshTokenLifetime = table.Column<int>(nullable: false),
                     RefreshTokenUsage = table.Column<int>(nullable: false),
-                    UpdateAccessTokenCsOnRefresh = table.Column<bool>(nullable: false),
+                    UpdateAccessTokenClaimsOnRefr = table.Column<bool>(name: "UpdateAccessTokenClaimsOnRefr~", nullable: false),
                     RefreshTokenExpiration = table.Column<int>(nullable: false),
                     AccessTokenType = table.Column<int>(nullable: false),
                     EnableLocalLogin = table.Column<bool>(nullable: false),
@@ -140,7 +139,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ApiResourceClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiRC_ApiRes_ApiResourceId",
+                        name: "FK_ApiResourceClaims_ApiResou~",
                         column: x => x.ApiResourceId,
                         principalTable: "ApiResources",
                         principalColumn: "Id",
@@ -161,7 +160,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ApiResourceProperties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiRP_ApiRes_ApiResourceId",
+                        name: "FK_ApiResourceProperties_ApiR~",
                         column: x => x.ApiResourceId,
                         principalTable: "ApiResources",
                         principalColumn: "Id",
@@ -181,7 +180,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ApiResourceScopes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiRS_ApiRes_ApiResourceId",
+                        name: "FK_ApiResourceScopes_ApiResou~",
                         column: x => x.ApiResourceId,
                         principalTable: "ApiResources",
                         principalColumn: "Id",
@@ -205,7 +204,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ApiResourceSecrets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiRSec_ApiRes_ApiResId",
+                        name: "FK_ApiResourceSecrets_ApiReso~",
                         column: x => x.ApiResourceId,
                         principalTable: "ApiResources",
                         principalColumn: "Id",
@@ -225,7 +224,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ApiScopeClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiSC_ApiScopes_ScopeId",
+                        name: "FK_ApiScopeClaims_ApiScopes_S~",
                         column: x => x.ScopeId,
                         principalTable: "ApiScopes",
                         principalColumn: "Id",
@@ -246,7 +245,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ApiScopeProperties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiSP_ApiScopes_ScopeId",
+                        name: "FK_ApiScopeProperties_ApiScop~",
                         column: x => x.ScopeId,
                         principalTable: "ApiScopes",
                         principalColumn: "Id",
@@ -267,7 +266,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ClientClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientC_Clients_ClientId",
+                        name: "FK_ClientClaims_Clients_Clien~",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
@@ -287,7 +286,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ClientCorsOrigins", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientCO_Clients_ClientId",
+                        name: "FK_ClientCorsOrigins_Clients_~",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
@@ -307,7 +306,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ClientGrantTypes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientGT_Clients_ClientId",
+                        name: "FK_ClientGrantTypes_Clients_C~",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
@@ -327,7 +326,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ClientIdPRestrictions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientIdPR_Client_ClientId",
+                        name: "FK_ClientIdPRestrictions_Clie~",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
@@ -345,9 +344,9 @@ namespace Identity.Migrations.ConfigurationDb
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClientPostLogoutRedUri", x => x.Id);
+                    table.PrimaryKey("PK_ClientPostLogoutRedirectUr~", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientPLRU_Client_ClientId",
+                        name: "FK_ClientPostLogoutRedirectUr~",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
@@ -368,7 +367,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ClientProperties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientProp_Client_ClientId",
+                        name: "FK_ClientProperties_Clients_C~",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
@@ -388,7 +387,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ClientRedirectUris", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientRUri_Client_ClientId",
+                        name: "FK_ClientRedirectUris_Clients~",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
@@ -408,7 +407,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ClientScopes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientSc_Clients_ClientId",
+                        name: "FK_ClientScopes_Clients_Clien~",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
@@ -432,7 +431,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_ClientSecrets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientSe_Clients_ClientId",
+                        name: "FK_ClientSecrets_Clients_Clie~",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
@@ -452,7 +451,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_IdentityResourceClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IRC_IR_IdentityResourceId",
+                        name: "FK_IdentityResourceClaims_Ide~",
                         column: x => x.IdentityResourceId,
                         principalTable: "IdentityResources",
                         principalColumn: "Id",
@@ -473,7 +472,7 @@ namespace Identity.Migrations.ConfigurationDb
                 {
                     table.PrimaryKey("PK_IdentityResourceProperties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IRP_IR_IdentityResourceId",
+                        name: "FK_IdentityResourceProperties~",
                         column: x => x.IdentityResourceId,
                         principalTable: "IdentityResources",
                         principalColumn: "Id",
@@ -481,12 +480,12 @@ namespace Identity.Migrations.ConfigurationDb
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiRC_ApiResourceId",
+                name: "IX_ApiResourceClaims_ApiResou~",
                 table: "ApiResourceClaims",
                 column: "ApiResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiRP_ApiResourceId",
+                name: "IX_ApiResourceProperties_ApiR~",
                 table: "ApiResourceProperties",
                 column: "ApiResourceId");
 
@@ -497,12 +496,12 @@ namespace Identity.Migrations.ConfigurationDb
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiRSc_ApiResourceId",
+                name: "IX_ApiResourceScopes_ApiResou~",
                 table: "ApiResourceScopes",
                 column: "ApiResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiRSe_ApiResourceId",
+                name: "IX_ApiResourceSecrets_ApiReso~",
                 table: "ApiResourceSecrets",
                 column: "ApiResourceId");
 
@@ -538,12 +537,12 @@ namespace Identity.Migrations.ConfigurationDb
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientIdPRestricts_ClientId",
+                name: "IX_ClientIdPRestrictions_Clie~",
                 table: "ClientIdPRestrictions",
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientPostLogUri_ClientId",
+                name: "IX_ClientPostLogoutRedirectUr~",
                 table: "ClientPostLogoutRedirectUris",
                 column: "ClientId");
 
@@ -553,7 +552,7 @@ namespace Identity.Migrations.ConfigurationDb
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientRedirectUri_ClientId",
+                name: "IX_ClientRedirectUris_ClientId",
                 table: "ClientRedirectUris",
                 column: "ClientId");
 
@@ -574,12 +573,12 @@ namespace Identity.Migrations.ConfigurationDb
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IRCl_IdentityResourceId",
+                name: "IX_IdentityResourceClaims_Ide~",
                 table: "IdentityResourceClaims",
                 column: "IdentityResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IRP_IdentityResourceId",
+                name: "IX_IdentityResourceProperties~",
                 table: "IdentityResourceProperties",
                 column: "IdentityResourceId");
 

@@ -4,9 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Data
 {
-    public class ApplicationConfigurationDbContext : ConfigurationDbContext<ApplicationConfigurationDbContext>
+
+    public class ApplicationPersistedGrantDbContext : PersistedGrantDbContext<ApplicationPersistedGrantDbContext>
     {
-        public ApplicationConfigurationDbContext(DbContextOptions<ApplicationConfigurationDbContext> options, ConfigurationStoreOptions storeOptions)
+        public ApplicationPersistedGrantDbContext(DbContextOptions<ApplicationPersistedGrantDbContext> options, OperationalStoreOptions storeOptions)
             : base(options, storeOptions)
         {
         }
